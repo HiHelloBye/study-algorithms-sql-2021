@@ -315,5 +315,20 @@ end;
 
 select ename, GetDouble(sal) from emp;
 
+-- Q. 부서번호를 받으면 부서명을 반환하는 함수
+```
+create or replace function getDname(v in number)
+return varchar2
+is vdname varchar2(10);
+begin
+    select dname into vdname
+    from dept
+    where deptno = v;
+    return vdname;
+end;
+/
+
+select ename, getDname(deptno) from emp;
+```
 
 > Written with [StackEdit](https://stackedit.io/)  
