@@ -329,6 +329,18 @@ end;
 /
 
 select ename, getDname(deptno) from emp;
+select getDname(10) from dual;
+
+declare
+    deptno  number;
+begin
+    deptno := &d;
+    dbms_output.put_line(getDname(deptno));
+end;
+/
+
 ```
+
+
 
 > Written with [StackEdit](https://stackedit.io/)  
