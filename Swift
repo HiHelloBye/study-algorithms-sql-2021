@@ -1,0 +1,74 @@
+```c
+class  Concentration {
+  var cards = [Card]()
+  
+  var indexOfOneAndOnlyFaceUpCard: Int?
+  func chooseCard(at index: Int) {
+    if !cards[index].isMatched {
+      if let matchIndex = indexOfOneAndOnlyFaceUpCard,  matchIndex != index {
+          // check if cards match
+         if cards[matchIndex[.identifier == cards[index].identifier {
+          cards[matchIndex].isMatched = true
+          cards[index].isMatched = true
+         }
+         cards[index].isFaceUp = true
+         indexOfOneAndOnlyFaceUpCard = nil
+      } else {
+        // either no cards or 2 cards are face up
+         for flipDownIndex in cards.indices {
+            cards[flipDownIndex].isFaceUp = false
+         }
+         cards[index].isFaceUp = true
+         indexOfOneAndOnlyFaceUpCard = index
+         //indices - 모든 Cards안의 인덱스를 의미한다
+      }
+    }
+  }
+  
+  
+- viewController.swift
+  
+  func updateViewFromModel() {
+    for index in cardButtons.indices {
+      let button = cardButtons[index]
+      let card = game.cards[index]
+      
+      if card.isFaceUp {
+        button.setTitle(emoji(for: card), for: UIControlState.normal)
+        button.backgroudColor =
+      } else {
+        button.setTitle("", for:UIControlState.normal)
+        button.backgroundColor = card.isMatched ? Opacity : Orange
+      }
+    }
+  } 
+  
+  var emojiChoices = ["", "" ...]
+  
+  var emoji = [Int:String]()
+  
+  func emoji(for card: Card) -> String {
+    if emoji[card.identifier] == nil, emojiChoices.count > 0 {
+          let randimIndex = arc4random_uniform(emojiChoices.count) -> Int(arc4random_uniform(UInt32(emojiChoices.count))) 
+          /*
+          - arc4random_uniform 은 부호가 없는 정수형에서만 쓸 수 있다. 배열의 개수는 정수형이다(int)
+          부호가 없는 정수는 아니다(not unsigned) 0> 타입변환 해야 함
+          - index는 부호 없는 정수형이다 -> 그래서 정수형으로 변환해주어야함
+          */
+          emoji[card.identifier] = emojiChoices.remove(at: randomIndex) 
+    }
+    -> 중첩된 if문은 쉼표로 구분한 뒤 적을 수 있다
+    
+    /*
+    if emoji[card.identifier] != nil { // 딕셔너리에서 무언가를 찾으면 옵셔널을 리턴한다
+      return emoji[card.identifier]!
+    } else {
+      return "?"
+    }
+    */
+    
+    -> 위의 코드는 아래 코드와 동일하다
+    return emoji[card.identifier] ?? "?"
+  }
+      
+```
