@@ -1,0 +1,42 @@
+'''C++
+
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <iostream>
+#include <map>
+using namespace std;
+typedef pair<int, double> ii;
+
+//map의 value기준 정렬(내림차순)
+bool cmp(const ii& a, const ii& b) {
+	if (a.second == b.second) return a.first < b.first;
+	return a.second > b.second;
+}
+
+vector<int> solution(int N, vector<int> stages) {
+    vector<int> answer;
+    map<int, double> m;
+    map<int, double> fail;
+    
+    sort(stages.begin(), stages.end());
+    
+    for(int i : stages) {
+        m[i]++;
+    }
+    
+    int former = 0;
+    for(int i=1;i<N+1;i++) {
+        // 분모가 0일때의 방어코드 필요
+        double failure = ((stages.size()-former)!=0)?m[i]/double(stages.size()-former):0;
+        fail[i]=failure;      
+        former += m[i];
+    }
+    vector<ii> vec( fail.begin(), fail.end() );
+    sort(vec.begin(), vec.end(), cmp);
+
+    for(auto num:vec) {
+        answer.push_back(num.first);
+    }
+    return answer;
+}
